@@ -124,9 +124,19 @@ function debugSendTestEmail() {
   Logger.log("Sent to " + toEmail);
 }
 
+// Must be a verified "Send mail as" alias on the Gmail account running this
+// script (Gmail -> Settings -> Accounts and Import -> Send mail as), or
+// MailApp.sendEmail throws and every download request will silently fail
+// (logged as "EMAIL FAILED" in the Downloads sheet). Don't set this until
+// that verification is done.
+var SEND_FROM_EMAIL = "ephraim@visaplanneronline.com";
+var SEND_FROM_NAME = "Visa Planner Online";
+
 function sendResourceEmail_(toEmail, title, pdfBlob) {
   MailApp.sendEmail({
     to: toEmail,
+    from: SEND_FROM_EMAIL,
+    name: SEND_FROM_NAME,
     subject: "Your free guide: " + title,
     body:
       'Hi,\n\nThanks for requesting "' +
