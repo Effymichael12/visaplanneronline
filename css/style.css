@@ -1264,6 +1264,20 @@ body.modal-open {
   max-width: 380px;
 }
 
+.footer__whatsapp {
+  margin-bottom: 0.75rem;
+}
+
+.footer__whatsapp a {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+.footer__whatsapp a:hover {
+  text-decoration: underline;
+}
+
 .footer__nav {
   display: flex;
   flex-direction: column;
