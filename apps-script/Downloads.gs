@@ -36,6 +36,10 @@ var RESOURCE_LIBRARY = {
     title: "Student Visa Document Checklist",
     driveFileId: "1IjRPQ3Z8fAgHo5ulct-MT69czroQaUFq",
   },
+  "canada-sop-guide": {
+    title: "Canadian Visa SOP (Student & Visitor)",
+    driveFileId: "1AeBRze5wOjXVb8OJxANuMP1xp07Prg47",
+  },
 };
 
 function handleDownloadRequest_(p) {
