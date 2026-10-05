@@ -407,6 +407,10 @@
   box-shadow: 0 20px 44px rgba(15, 36, 54, 0.14);
 }
 
+.blog-teaser-card + .blog-teaser-card {
+  margin-top: 1.75rem;
+}
+
 .blog-teaser-card__icon {
   flex-shrink: 0;
   width: 64px;
