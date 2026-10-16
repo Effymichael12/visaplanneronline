@@ -1531,7 +1531,12 @@ body.modal-open {
   }
 
   .hero__inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero__content,
+  .hero-form-card {
+    min-width: 0;
   }
 
   .hero__content {
@@ -1581,28 +1586,94 @@ body.modal-open {
 }
 
 @media (max-width: 600px) {
+  .navbar {
+    padding: 1rem 1.25rem;
+  }
+
+  .navbar__logo-img {
+    height: 36px;
+  }
+
+  .navbar__cta {
+    padding: 0.5rem 0.95rem;
+    font-size: 0.78rem;
+  }
+
   .hero {
     min-height: auto;
-    padding: 6.5rem 1.25rem 2.5rem;
+    padding: 7.5rem 1.25rem 2.5rem;
+  }
+
+  .hero__title {
+    font-size: 1.85rem;
+  }
+
+  .hero__title br {
+    display: none;
+  }
+
+  .hero__countries {
+    gap: 0.75rem;
+    flex-wrap: nowrap;
+  }
+
+  /* Icon/flag bubbles only on mobile */
+  .country-pill {
+    padding: 0.35rem;
+    width: auto;
+  }
+
+  .country-pill__text {
+    display: none;
+  }
+
+  .country-pill__flag {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.6rem;
   }
 
   .hero-form-card {
-    padding: 1.5rem;
-    margin-top: 1.5rem;
+    width: 100%;
+    margin: 2rem auto 0;
+    padding: 2.25rem 1.25rem 1.5rem;
   }
 
   .hero-badge {
     top: -16px;
-    right: 1rem;
+    right: 50%;
+    transform: translateX(50%);
+    max-width: calc(100% - 1.5rem);
   }
 
-  .country-pill {
-    width: 100%;
+  .hero-badge__text {
+    white-space: normal;
+    line-height: 1.2;
   }
 
-  .hero__countries {
-    flex-direction: column;
+  .hero-form-card__title {
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .hero-form-card__text {
+    text-align: center;
+  }
+
+  .hero-form .contact-form__row {
+    gap: 0.85rem;
+  }
+
+  .contact-form__field,
+  .phone-field,
+  .phone-field__number {
+    min-width: 0;
+  }
+
+  .contact-form__field input,
+  .contact-form__field select {
     width: 100%;
+    min-width: 0;
   }
 
   .process__grid {
