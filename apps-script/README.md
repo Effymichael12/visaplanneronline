@@ -1,40 +1,47 @@
-# Contact form + free resource downloads → Google Sheets & Gmail (no server required)
+# Site forms → Google Sheets & Gmail (no server required)
 
-The site is fully static (GitHub Pages), so instead of a backend, both
-of its forms submit straight to a **Google Apps Script Web App** —
-Google hosts and runs this for free. One script/deployment handles two
-things:
+The site is fully static (GitHub Pages), so instead of a backend, all
+three of its forms submit straight to a **Google Apps Script Web App** —
+Google hosts and runs this for free. One script/deployment handles
+three things:
 
 1. The **"Connect With Us" contact form** → appends a row to a
    `Submissions` tab in your Google Sheet.
 2. The **"Download for Free" popup** on each resource card → appends a
    row to a `Downloads` tab, *and* emails the requester a PDF of the
    guide they asked for.
+3. The homepage hero's **"Free 30-Minute Consultation" form** →
+   appends a row to a `Consultations` tab in your Google Sheet.
 
 There's nothing to host, scale, or pay for.
 
 ## How it works
 
-1. Someone submits either form on the site.
-2. `js/contact-form.js` (contact form) or `js/resource-download.js`
-   (download popup) POSTs the form fields to the same Apps Script URL,
-   configured once in `js/config.js`. A hidden `formType` field
-   (`contact` or `download`) tells the script which one it is.
-3. The Apps Script project, running on Google's infrastructure, either
-   logs the contact submission, or logs the download request **and**
-   emails a PDF attachment to the address they gave.
+1. Someone submits one of the three forms on the site.
+2. `js/contact-form.js` (contact form), `js/resource-download.js`
+   (download popup), or `js/hero-consultation-form.js` (hero
+   consultation form) POSTs the form fields to the same Apps Script
+   URL, configured once in `js/config.js`. A hidden `formType` field
+   (`contact`, `download`, or `consultation`) tells the script which
+   one it is.
+3. The Apps Script project, running on Google's infrastructure, logs
+   the contact submission or the consultation request, or logs the
+   download request **and** emails a PDF attachment to the address
+   they gave.
 
 This repo's `apps-script/` folder mirrors one Apps Script **project**
-made up of four files — Apps Script compiles every `.gs` file in a
-project into one shared scope, so the three code files are split purely
+made up of five files — Apps Script compiles every `.gs` file in a
+project into one shared scope, so the code files are split purely
 for readability, not separate scripts or deployments (the manifest is
 the one file that's structurally different — see below):
 
-- **`Code.gs`** — the router (`doPost`/`doGet`) plus small helpers both
-  forms share. Start here to see how a submission gets dispatched.
+- **`Code.gs`** — the router (`doPost`/`doGet`) plus small helpers all
+  three forms share. Start here to see how a submission gets dispatched.
 - **`Contact.gs`** — everything for the "Connect With Us" form.
 - **`Downloads.gs`** — everything for the free-resource popup: the
   resource library, PDF generation/lookup, and the email send.
+- **`Consultation.gs`** — everything for the hero's free consultation
+  form.
 - **`appsscript.json`** — the project manifest. Declares every OAuth
   scope the project needs up front, so the one-time authorization is a
   single screen covering everything instead of a prompt appearing again
@@ -45,7 +52,7 @@ the one file that's structurally different — see below):
 
   | Scope | Why it's needed |
   |---|---|
-  | `spreadsheets` | Reading/writing the `Submissions` and `Downloads` tabs |
+  | `spreadsheets` | Reading/writing the `Submissions`, `Downloads`, and `Consultations` tabs |
   | `drive` | Exporting the temp Doc as a PDF, trashing it, and reading a real uploaded PDF by file ID |
   | `documents` | `DocumentApp.create()` — building the temp placeholder Doc in the first place |
   | `script.send_mail` | `MailApp.sendEmail` — the narrow "send mail as you" scope, not full Gmail access |
@@ -72,13 +79,15 @@ the one file that's structurally different — see below):
    in editor"**. Go back to the editor (the `<>` icon) — you'll now see
    `appsscript.json` listed alongside `Code.gs`.
 
-4. **Create the four files.** Paste the contents of this repo's
+4. **Create the five files.** Paste the contents of this repo's
    [`apps-script/Code.gs`](Code.gs) into the project's existing
-   `Code.gs`. For the next two, click the **+** next to "Files" in the
+   `Code.gs`. For the next three, click the **+** next to "Files" in the
    left sidebar → **Script**, name it `Contact` (Apps Script adds the
    `.gs` itself), and paste in [`apps-script/Contact.gs`](Contact.gs).
-   Repeat once more for a file named `Downloads`, pasting in
-   [`apps-script/Downloads.gs`](Downloads.gs). Finally, open the
+   Repeat for a file named `Downloads`, pasting in
+   [`apps-script/Downloads.gs`](Downloads.gs), and again for a file
+   named `Consultation`, pasting in
+   [`apps-script/Consultation.gs`](Consultation.gs). Finally, open the
    `appsscript.json` you just revealed, delete its contents, and paste
    in this repo's [`apps-script/appsscript.json`](appsscript.json).
    Save (Ctrl/Cmd+S) —
@@ -114,7 +123,7 @@ the one file that's structurally different — see below):
    ```js
    window.VPO_APPS_SCRIPT_URL = "https://script.google.com/macros/s/.../exec";
    ```
-   Commit and push. Both forms read from this one constant.
+   Commit and push. All three forms read from this one constant.
 
 ## Sending the real guides instead of placeholder PDFs
 

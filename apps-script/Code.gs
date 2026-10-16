@@ -1,23 +1,24 @@
 /**
- * Router + shared helpers for the Visa Planner Online site's two forms.
+ * Router + shared helpers for the Visa Planner Online site's forms.
  *
  * The actual per-form logic lives in its own file:
- *   - Contact.gs   -> the "Connect With Us" contact form
- *   - Downloads.gs -> the free-resource download popup (logs + emails a PDF)
+ *   - Contact.gs      -> the "Connect With Us" contact form
+ *   - Downloads.gs    -> the free-resource download popup (logs + emails a PDF)
+ *   - Consultation.gs -> the hero "Free 30-Minute Consultation" form
  *
  * Apps Script compiles every .gs file in a project into one shared global
  * scope, so it doesn't matter which file a function is defined in — this
- * split is purely for readability. Paste all three files into the same
+ * split is purely for readability. Paste all four files into the same
  * Apps Script project (see README.md); nothing here needs a project per
  * file or a separate deployment.
  */
 
-// Bump this string any time you edit any of the three files, then create
+// Bump this string any time you edit any of these files, then create
 // a new deployment version. Opening the deployed /exec URL in a browser
 // (a GET request) shows this back to you, so you can confirm the live
 // deployment actually has your latest edits without digging through
 // Deploy -> Manage deployments.
-var CODE_VERSION = "2026-01-download-split-2";
+var CODE_VERSION = "2026-10-workspace-migration";
 
 function doPost(e) {
   var p = (e && e.parameter) || {};
@@ -25,6 +26,10 @@ function doPost(e) {
 
   if (formType === "download") {
     return handleDownloadRequest_(p); // defined in Downloads.gs
+  }
+
+  if (formType === "consultation") {
+    return handleConsultationRequest_(p); // defined in Consultation.gs
   }
 
   return handleContactSubmission_(p); // defined in Contact.gs

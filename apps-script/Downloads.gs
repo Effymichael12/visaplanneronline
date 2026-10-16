@@ -18,27 +18,27 @@ var DOWNLOADS_SHEET_NAME = "Downloads";
 var RESOURCE_LIBRARY = {
   "f1-visa-guide": {
     title: "F-1 Visa Interview Preparation Guide",
-    driveFileId: "1lhDrqptxkC6S6fvXcxRdvzh8U67PzxOI",
+    driveFileId: "1cA-tI2354YjGMwGPbD8NvSc7uE19_j8j",
   },
   "usa-arrival-checklist": {
     title: "Moving to America: Your First 30 Days",
-    driveFileId: "17BMiomg4Fx8xfl9a9C3pMoZsd8PEo3Al",
+    driveFileId: "15bN8boY2rsLRO4p_a3MAS7OmpR2nnkQc",
   },
   "uk-arrival-checklist": {
     title: "UK Student Arrival Checklist",
-    driveFileId: "1FHrDf8Xr1troQam6uC18yrkhAyDPGnn1",
+    driveFileId: "1rxWHqC-JAiZVYyvEKOegKKVFzF8vrjul",
   },
   "canada-arrival-guide": {
     title: "Canada Student Arrival Guide",
-    driveFileId: "1KR7TR2VakcVfrDm2ZNgC6_Mjplot7gwa",
+    driveFileId: "1X2gbLdu8MXmdgH4hm8o5BOkeg-gi2-Fm",
   },
   "general-document-checklist": {
     title: "Student Visa Document Checklist",
-    driveFileId: "1IjRPQ3Z8fAgHo5ulct-MT69czroQaUFq",
+    driveFileId: "1KfitVbMcaH4dUabEP_gggJJ1Dzz1_pcs",
   },
   "canada-sop-guide": {
     title: "Canadian Visa SOP (Student & Visitor)",
-    driveFileId: "1AeBRze5wOjXVb8OJxANuMP1xp07Prg47",
+    driveFileId: "1IVstip2kVHrTHDGQRezk6zDyDB6H61IA",
   },
 };
 
