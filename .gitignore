@@ -4,3 +4,6 @@
 # Editor/local settings
 .vscode/
 .claude/
+
+# Internal reference material (not site content)
+.context/
