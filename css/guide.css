@@ -1,0 +1,187 @@
+/* =========================================================
+   GUIDE MICROSITE PAGES (/guide/*)
+   Video hero + redirect-to-main-site CTA. Builds on style.css.
+========================================================= */
+
+.guide-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--color-navy-dark);
+  background-image:
+    radial-gradient(640px circle at 85% 8%, rgba(47, 184, 166, 0.35), transparent 60%),
+    radial-gradient(520px circle at 8% 95%, rgba(47, 184, 166, 0.18), transparent 55%),
+    radial-gradient(900px circle at 50% 120%, rgba(255, 255, 255, 0.06), transparent 60%),
+    linear-gradient(135deg, var(--color-navy-dark) 0%, var(--color-navy) 55%, var(--color-teal-dark) 130%);
+  padding: 6.5rem 1.5rem 3rem;
+}
+
+.guide-hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+.guide-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.guide-hero__eyebrow {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-white);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.9rem;
+  margin-bottom: 1.1rem;
+}
+
+.guide-hero__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  line-height: 1.2;
+  color: var(--color-white);
+  margin-bottom: 1.25rem;
+}
+
+/* Deliberately larger than the standard hero subtitle: this is the copy we want read. */
+.guide-hero__description {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 640px;
+}
+
+.guide-hero__description p + p {
+  margin-top: 1rem;
+}
+
+.guide-hero__subhead {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--color-white);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.guide-hero__list {
+  margin: 0.75rem 0 1rem 1.4rem;
+}
+
+.guide-hero__list li + li {
+  margin-top: 0.4rem;
+}
+
+/* ---- White phone silhouette holding the YouTube Short ---- */
+
+.phone {
+  justify-self: center;
+  width: min(100%, 300px);
+  background: var(--color-white);
+  border-radius: 44px;
+  padding: 14px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+
+.phone::before {
+  /* speaker / camera pill */
+  content: "";
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 18px;
+  background: #0b0b0b;
+  border-radius: 999px;
+  z-index: 2;
+}
+
+.phone__screen {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  background: #000;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.phone__screen iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ---- Redirect section ---- */
+
+.guide-cta {
+  background: var(--color-bg-light);
+  padding: 5rem 1.5rem;
+}
+
+.guide-cta__inner {
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.guide-cta__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--color-navy);
+  margin-bottom: 1rem;
+}
+
+.guide-cta__text {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+.guide-cta__note {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #8a959d;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 900px) {
+  .guide-hero {
+    min-height: auto;
+    padding: 6rem 1.25rem 3rem;
+  }
+
+  .guide-hero__inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .phone {
+    width: min(100%, 280px);
+  }
+
+  .guide-hero__description {
+    font-size: 1.05rem;
+  }
+}
