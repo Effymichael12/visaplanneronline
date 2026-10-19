@@ -185,3 +185,22 @@
     font-size: 1.05rem;
   }
 }
+
+/* ---- Variant: video aligned to the top of the text (long articles) ---- */
+
+.guide-hero--top .guide-hero__inner {
+  align-items: start;
+}
+
+.guide-hero--top .phone {
+  position: sticky;
+  top: 6rem;
+}
+
+@media (max-width: 900px) {
+  .guide-hero--top .phone {
+    order: -1;
+    position: relative;
+    top: auto;
+  }
+}
