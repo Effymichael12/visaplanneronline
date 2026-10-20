@@ -204,3 +204,38 @@
     top: auto;
   }
 }
+
+/* ---- Variant: text wraps around the video (long articles) ---- */
+
+.guide-hero--wrap .guide-hero__inner {
+  display: block;
+  max-width: 1000px;
+}
+
+.guide-hero--wrap .guide-hero__content {
+  display: block;
+}
+
+.guide-hero--wrap .guide-hero__description {
+  max-width: none;
+}
+
+.guide-hero--wrap .phone {
+  float: right;
+  width: 300px;
+  margin: 0.25rem 0 1.5rem 3rem;
+}
+
+.guide-hero--wrap .guide-hero__inner::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+@media (max-width: 900px) {
+  .guide-hero--wrap .phone {
+    float: none;
+    width: min(100%, 280px);
+    margin: 0 auto 2rem;
+  }
+}
