@@ -126,6 +126,10 @@
   gap: 1.25rem;
 }
 
+.offers--three {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .offers--single {
   grid-template-columns: minmax(0, 520px);
   justify-content: center;
@@ -404,7 +408,8 @@
     padding: 6.5rem 1.25rem 2.5rem;
   }
 
-  .offers {
+  .offers,
+  .offers--three {
     grid-template-columns: 1fr;
   }
 }
