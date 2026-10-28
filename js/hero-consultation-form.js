@@ -1,5 +1,5 @@
 /**
- * Hero "Free 30-Minute Consultation" form: serverless submission to
+ * Hero "Free Discovery Call" form: serverless submission to
  * Google Sheets, same pattern as js/contact-form.js (see that file for
  * the full setup walkthrough — both forms share the same Apps Script
  * deployment, routed by the `formType` field).
