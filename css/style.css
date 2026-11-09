@@ -1646,9 +1646,12 @@ body.modal-open {
     max-width: calc(100% - 1.5rem);
   }
 
+  .hero-badge {
+    padding: 0.4rem;
+  }
+
   .hero-badge__text {
-    white-space: normal;
-    line-height: 1.2;
+    display: none;
   }
 
   .hero-form-card__title {
