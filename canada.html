@@ -164,11 +164,12 @@
         <a href="united-states.html">United States</a>
         <a href="united-kingdom.html">United Kingdom</a>
         <a href="canada.html">Canada</a>
+        <a href="#services">Services</a>
         <a href="index.html#pricing">Pricing</a>
-        <a href="index.html#resources">Resources</a>
+        <a href="#resources">Resources</a>
       </nav>
 
-      <a href="index.html#resources" class="btn btn--teal navbar__cta">Download Free Resources</a>
+      <a href="#resources" class="btn btn--teal navbar__cta">Download Free Resources</a>
     </div>
   </header>
 
@@ -509,6 +510,71 @@
     </div>
   </section>
 
+  <!-- ===== EXTRA SUPPORT (PAID SERVICES) ===== -->
+  <section class="visa-section" id="services">
+    <div class="visa-section__inner">
+      <h2 class="page-section-title" style="margin-bottom:0.75rem">Extra Support When You Need It</h2>
+      <p class="section-subtitle">One-off, fixed-price help for Canada: a quick check, a live session, or a second opinion before you submit.</p>
+
+      <div class="service-grid">
+        <article class="service-card service-card--featured">
+          <span class="service-card__tag">1-on-1</span>
+          <h3 class="service-card__name">30 Min Strategic Advice</h3>
+          <p class="service-card__price">R590</p>
+          <p class="service-card__desc">A live strategy call to map out your Canadian study permit or visitor visa, documents and next steps.</p>
+          <a href="https://calendar.app.google/TrDjHkE5pHtSuZ4H9" class="btn btn--teal" target="_blank" rel="noopener" data-offer="consultation">Book Strategic Advice</a>
+        </article>
+        <article class="service-card">
+          <span class="service-card__tag">Quick check</span>
+          <h3 class="service-card__name">Quick Visa Scam Check</h3>
+          <p class="service-card__price">R390</p>
+          <p class="service-card__desc">We analyse suspicious emails, chat messages and the background of any agent you are working with.</p>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_qcNL4wDgcgGOwMYay9wclewVSzvII93mE5Oh1aAAjL-Jzw/viewform?usp=publish-editor" class="btn btn--teal" target="_blank" rel="noopener" data-offer="scam-check">Order Scam Check</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FREE RESOURCES ===== -->
+  <section class="resources resources--alt" id="resources">
+    <div class="resources__inner">
+      <h2 class="resources__title">Free Resources</h2>
+      <p class="resources__text">
+        Enter your email and we'll send any of these straight to your inbox as a PDF.
+      </p>
+
+      <div class="resources__grid resources__grid--flex">
+        <article class="resource-card" style="background-image: url('images/SOP_canada.png');">
+          <div class="resource-card__overlay"></div>
+          <div class="resource-card__content">
+            <span class="resource-card__badge"><span class="resource-card__badge-icon">🍁</span>Canada</span>
+            <h3 class="resource-card__title">Canadian Visa SOP (Student &amp; Visitor)</h3>
+            <p class="resource-card__text">A guided template for writing a strong Statement of Purpose for your Canadian study or visit visa.</p>
+            <button type="button" class="btn btn--light resource-card__btn" data-resource="canada-sop-guide" data-resource-title="Canadian Visa SOP (Student &amp; Visitor)">Download for Free</button>
+          </div>
+        </article>
+        <article class="resource-card" style="background-image: url('images/resource-canada.jpg');">
+          <div class="resource-card__overlay"></div>
+          <div class="resource-card__content">
+            <span class="resource-card__badge"><span class="resource-card__badge-icon">🍁</span>Canada</span>
+            <h3 class="resource-card__title">Canada Student Arrival Guide</h3>
+            <p class="resource-card__text">Essential steps for acquiring your SIN, setting up utilities, and preparing for life on campus.</p>
+            <button type="button" class="btn btn--light resource-card__btn" data-resource="canada-arrival-guide" data-resource-title="Canada Student Arrival Guide">Download for Free</button>
+          </div>
+        </article>
+        <article class="resource-card" style="background-image: url('images/resource-general.jpg');">
+          <div class="resource-card__overlay"></div>
+          <div class="resource-card__content">
+            <span class="resource-card__badge"><span class="resource-card__badge-icon">🌐</span>General</span>
+            <h3 class="resource-card__title">Student Visa Document Checklist</h3>
+            <p class="resource-card__text">A universal checklist to ensure your application package is complete and organized.</p>
+            <button type="button" class="btn btn--light resource-card__btn" data-resource="general-document-checklist" data-resource-title="Student Visa Document Checklist">Download for Free</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== CANADA VISA FAQ SECTION ===== -->
   <section class="faq" id="faq">
     <div class="faq__inner">
@@ -643,7 +709,43 @@
     </div>
   </footer>
 
+  <!-- ===== FREE RESOURCE DOWNLOAD MODAL ===== -->
+  <div class="modal" id="resourceModal" hidden>
+    <div class="modal__backdrop" data-modal-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="resourceModalTitle">
+      <button type="button" class="modal__close" data-modal-close aria-label="Close">&times;</button>
+
+      <h3 class="modal__title" id="resourceModalTitle">Get Your Free Guide</h3>
+      <p class="modal__text">
+        Enter your email and we'll send <span id="resourceModalResourceName">this guide</span>
+        straight to your inbox as a PDF.
+      </p>
+
+      <form class="modal__form" id="resourceForm">
+        <input type="hidden" name="formType" value="download" />
+        <input type="hidden" name="resourceSlug" id="resourceSlug" />
+        <input type="hidden" name="resourceTitle" id="resourceTitle" />
+
+        <div class="contact-form__field">
+          <label for="resourceEmail">Email Address</label>
+          <input type="email" id="resourceEmail" name="email" placeholder="alex@example.com" required />
+        </div>
+
+        <button type="submit" class="btn btn--dark modal__submit">Send Me the PDF</button>
+
+        <p class="contact-form__status" aria-live="polite"></p>
+
+        <p class="contact-form__consent">
+          By submitting, you agree to be contacted by Visa Planner Online. We respect your
+          privacy and never sell your data.
+        </p>
+      </form>
+    </div>
+  </div>
+
   <script src="js/config.js"></script>
   <script src="js/hero-consultation-form.js"></script>
+  <script src="js/resource-download.js"></script>
+  <script src="js/service-tracking.js"></script>
 </body>
 </html>

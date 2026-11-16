@@ -40,7 +40,35 @@ var RESOURCE_LIBRARY = {
     title: "Canadian Visa SOP (Student & Visitor)",
     driveFileId: "1IVstip2kVHrTHDGQRezk6zDyDB6H61IA",
   },
+
+  // ---- Added Nov 2026. These are NOT looked up by file ID: they're found
+  // by name inside the Drive folder NEW_RESOURCES_FOLDER_ID below. `match`
+  // is a case-insensitive piece of the PDF's file name. To replace a PDF,
+  // just swap the file in that folder (keep the name recognisable).
+  "uk-visa-journey-cost": {
+    title: "UK Student Visa Journey: Cost Overview",
+    match: "UK Student Visa Journey",
+  },
+  "cas-interview-checklist": {
+    title: "CAS Interview Preparation Checklist",
+    match: "CAS Interview",
+  },
+  "us-visitor-sponsor-letter": {
+    title: "Sample Sponsor Letter for a US Visitor Visa",
+    match: "Sponsor Letter",
+  },
+  "sevis-i901-payment-guide": {
+    title: "How to Pay the SEVIS I-901 Fee",
+    match: "SEVIS I-901",
+  },
+  "us-scholarship-tax-guide": {
+    title: "US Scholarship Tax Estimator Guide",
+    match: "Scholarship Tax",
+  },
 };
+
+// Drive folder holding the PDFs for the resources above that use `match`.
+var NEW_RESOURCES_FOLDER_ID = "1Hv6KrGGXvKqT5XRr3UH14go5h440NplC";
 
 function handleDownloadRequest_(p) {
   var email = p.email || "";
@@ -53,6 +81,7 @@ function handleDownloadRequest_(p) {
     "Email",
     "Resource",
     "Resource Slug",
+    "Source Page",
   ]);
 
   var status = "";
@@ -70,7 +99,19 @@ function handleDownloadRequest_(p) {
     status = "no email provided";
   }
 
-  sheet.appendRow([new Date(), email, title, slug + " — " + status]);
+  sheet.appendRow([new Date(), email, title, slug + " — " + status, p.sourcePage || ""]);
+
+  var failed = status.indexOf("EMAIL FAILED") === 0 || status === "no email provided";
+  notifyOwner_(
+    (failed ? "[ACTION NEEDED] " : "") + "Resource download: " + title,
+    [
+      ["Resource", title],
+      ["Requested by", email],
+      ["Status", status],
+      ["Page", p.sourcePage],
+    ],
+    email
+  );
 
   return jsonResponse_({ result: "success" });
 }
@@ -84,7 +125,44 @@ function getResourcePdf_(resource, title) {
   if (resource && resource.driveFileId) {
     return DriveApp.getFileById(resource.driveFileId).getBlob();
   }
+  if (resource && resource.match) {
+    // Throws (instead of sending a blank placeholder) if the PDF isn't in
+    // the folder, so a missing file shows up as EMAIL FAILED + an
+    // [ACTION NEEDED] notification rather than a useless attachment.
+    return findPdfInFolder_(NEW_RESOURCES_FOLDER_ID, resource.match);
+  }
   return createPlaceholderPdf_(title);
+}
+
+function findPdfInFolder_(folderId, match) {
+  var needle = match.toLowerCase();
+  var files = DriveApp.getFolderById(folderId).getFiles();
+  while (files.hasNext()) {
+    var file = files.next();
+    if (
+      file.getMimeType() === MimeType.PDF &&
+      file.getName().toLowerCase().indexOf(needle) !== -1
+    ) {
+      return file.getBlob();
+    }
+  }
+  throw new Error('No PDF matching "' + match + '" in folder ' + folderId);
+}
+
+/**
+ * Run from the editor to confirm every new resource's PDF is found in the
+ * folder (View -> Logs). Doesn't send any email.
+ */
+function checkNewResourcePdfs() {
+  Object.keys(RESOURCE_LIBRARY).forEach(function (slug) {
+    var r = RESOURCE_LIBRARY[slug];
+    if (!r.match) return;
+    try {
+      Logger.log("OK      " + slug + " -> " + findPdfInFolder_(NEW_RESOURCES_FOLDER_ID, r.match).getName());
+    } catch (err) {
+      Logger.log("MISSING " + slug + ": " + err);
+    }
+  });
 }
 
 function createPlaceholderPdf_(title) {

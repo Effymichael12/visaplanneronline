@@ -93,6 +93,7 @@
     setStatus("");
 
     var formData = new FormData(form);
+    formData.append("sourcePage", window.location.pathname);
 
     // Same no-cors trade-off as the contact form: we can't read the
     // response, so we treat a fetch that doesn't throw as success.

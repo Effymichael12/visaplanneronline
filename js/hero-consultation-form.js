@@ -38,6 +38,7 @@
     setStatus("");
 
     var formData = new FormData(form);
+    formData.append("sourcePage", window.location.pathname);
 
     // mode: "no-cors" is required because Apps Script web apps don't send
     // CORS headers. We can't read the response back, but the POST still

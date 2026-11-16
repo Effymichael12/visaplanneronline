@@ -17,6 +17,7 @@ function handleContactSubmission_(p) {
     "Destination",
     "Visa Type",
     "Message",
+    "Source Page",
   ]);
 
   sheet.appendRow([
@@ -27,7 +28,22 @@ function handleContactSubmission_(p) {
     p.destination || "",
     p.visaType || "",
     p.message || "",
+    p.sourcePage || "",
   ]);
+
+  notifyOwner_(
+    "New contact message: " + (p.firstName || "someone"),
+    [
+      ["Name", p.firstName],
+      ["Email", p.email],
+      ["Current country", p.currentCountry],
+      ["Destination", p.destination],
+      ["Visa type", p.visaType],
+      ["Message", p.message],
+      ["Page", p.sourcePage],
+    ],
+    p.email
+  );
 
   return jsonResponse_({ result: "success" });
 }

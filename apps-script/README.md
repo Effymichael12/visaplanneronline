@@ -65,6 +65,20 @@ the one file that's structurally different — see below):
   prompting for authorization, because as far as Apps Script is
   concerned that scope was never requested at all.
 
+## Owner notifications and service-click tracking
+
+Every contact message, discovery-call request and resource download also
+emails a summary to `NOTIFY_EMAIL` (set at the top of `Code.gs`, currently
+ephraim@visaplanneronline.com), with Reply-To set to the visitor so you can
+reply directly. A failed PDF send is flagged `[ACTION NEEDED]` in the
+subject. Each row also records the `Source Page` it came from.
+
+`Offers.gs` logs clicks on the paid-service buttons (country pages) to an
+`OfferClicks` tab. Those buttons open Google Forms/Calendar, so to be told
+when a form is actually filled in, turn on notifications in each Form
+(Responses -> bell icon). **New file:** create `Offers` in the Apps Script
+project and paste `Offers.gs`, then redeploy.
+
 ## One-time setup
 
 1. **Create a Google Sheet.** Go to [sheets.google.com](https://sheets.google.com),

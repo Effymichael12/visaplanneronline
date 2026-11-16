@@ -16,6 +16,7 @@ function handleConsultationRequest_(p) {
     "Phone",
     "Country of Residence",
     "Visa Type",
+    "Source Page",
   ]);
 
   var phone = ((p.phoneCountryCode || "") + " " + (p.phone || "")).trim();
@@ -27,7 +28,21 @@ function handleConsultationRequest_(p) {
     phone,
     p.countryOfResidence || "",
     p.visaType || "",
+    p.sourcePage || "",
   ]);
+
+  notifyOwner_(
+    "New discovery call request: " + (p.fullName || "someone"),
+    [
+      ["Name", p.fullName],
+      ["Email", p.email],
+      ["Phone", phone],
+      ["Country of residence", p.countryOfResidence],
+      ["Visa type", p.visaType],
+      ["Page", p.sourcePage],
+    ],
+    p.email
+  );
 
   return jsonResponse_({ result: "success" });
 }
