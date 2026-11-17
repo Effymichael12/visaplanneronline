@@ -595,6 +595,21 @@
 
           <div class="contact-form__row">
             <div class="contact-form__field">
+              <label for="contactPhone">Phone Number</label>
+              <div class="phone-field">
+                <select id="contactPhoneCode" name="phoneCountryCode" class="phone-field__code" aria-label="Country code">
+                  <option value="+27" selected>🇿🇦 +27</option>
+                  <option value="+44">🇬🇧 +44</option>
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+1">🇨🇦 +1</option>
+                </select>
+                <input type="tel" id="contactPhone" name="phone" class="phone-field__number" placeholder="82 123 4567" />
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form__row">
+            <div class="contact-form__field">
               <label for="currentCountry">Current Country</label>
               <input type="text" id="currentCountry" name="currentCountry" placeholder="e.g. Nigeria" />
             </div>

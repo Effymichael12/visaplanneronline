@@ -18,7 +18,10 @@ function handleContactSubmission_(p) {
     "Visa Type",
     "Message",
     "Source Page",
+    "Phone",
   ]);
+
+  var phone = ((p.phoneCountryCode || "") + " " + (p.phone || "")).trim();
 
   sheet.appendRow([
     new Date(),
@@ -29,6 +32,7 @@ function handleContactSubmission_(p) {
     p.visaType || "",
     p.message || "",
     p.sourcePage || "",
+    phone,
   ]);
 
   notifyOwner_(
@@ -36,6 +40,7 @@ function handleContactSubmission_(p) {
     [
       ["Name", p.firstName],
       ["Email", p.email],
+      ["Phone", phone],
       ["Current country", p.currentCountry],
       ["Destination", p.destination],
       ["Visa type", p.visaType],
